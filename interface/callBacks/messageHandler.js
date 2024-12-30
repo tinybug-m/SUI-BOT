@@ -12,7 +12,7 @@ export default async function messageHandler(ctx) {
         const match = userMessage.match(urlPattern);
         if (match) {
             const extractedValue = match[1];  // The part after /login/
-            await addConfigToUser(ctx.from.id,extractedValue)
+            await addConfigToUser(ctx.from.id, { username: extractedValue, notif: false })
             await ctx.reply(`کانفیگ ${extractedValue} با موفقیت اضافه شد!`);
 
             await selectConfig(ctx)

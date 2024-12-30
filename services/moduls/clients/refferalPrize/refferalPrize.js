@@ -9,7 +9,7 @@ const refferalPrize = async (userId, paymentId) => {
         if (!prizeInformation) return false;
 
         const { inviterSubscriptionName, inviterCommission, inviterID } = prizeInformation;
-        const success = await editConfigUsage(inviterSubscriptionName, inviterCommission);
+        const success = await editConfigUsage(userId, inviterSubscriptionName, inviterCommission);
 
         if (success) {
 

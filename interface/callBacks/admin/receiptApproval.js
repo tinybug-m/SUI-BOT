@@ -31,7 +31,7 @@ export default async function receiptApproval(ctx) {
             // Create a new user after payment acceptance
             // why empty config is == "0"
             if (config && config !== "0") {
-                await editConfigUsage(config, plan);
+                await editConfigUsage(userId, config, plan);
                 message = [
                     '<b>🎉 حساب شما با موفقیت شارژ شد!</b>',
                 ].join('\n\n');

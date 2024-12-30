@@ -3,7 +3,7 @@ import { handleEditConfigDatas } from "./handleEditConfigDatas.js";
 
 
 
-async function editConfigUsage(username = "tinyvpn", volume = 10) {
+async function editConfigUsage(userId, username = "tinyvpn", volume = 10) {
 
     const loads = await fetchLoads(process.env.SERVER_URL, process.env.USER_CREDENTIALS)
     if (!loads) {
@@ -14,6 +14,7 @@ async function editConfigUsage(username = "tinyvpn", volume = 10) {
     const finalData = await handleEditConfigDatas(loads, username, volume)
 
     const apiResponse = await saveClientApiConfig(finalData, process.env.SERVER_URL, process.env.USER_CREDENTIALS)
+    await updateSubscriptionNotif(userId, username, false)
 
     return (apiResponse?.success ? true : false)
 

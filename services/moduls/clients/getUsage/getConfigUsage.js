@@ -2,6 +2,7 @@ import { fetchLoads } from "../../../api/clientApis.js";
 import { bytesToGigabytes, findClientByUsername } from "../../utils/utils.js";
 
 const getConfigUsage = async (wantedUserName) => {
+    console.log({wantedUserName})
     const loads = await fetchLoads(process.env.SERVER_URL, process.env.USER_CREDENTIALS)
     if (!loads) {
         console.warn('Failed to fetch loads. Exiting...');

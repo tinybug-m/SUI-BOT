@@ -1,12 +1,17 @@
 import 'dotenv/config';
 import bot from './interface/botInstance.js';
 import { withErrorHandling } from './interface/utils/errorHandling.js';
+import cron from 'node-cron'
 
 // Import callback handlers
 import * as callbacks from './interface/callBacks/index.js';
-import { generateInlineKeyboards } from './interface/utils/generateInlineKeyboards.js';
-import { BackToMainMenuButton } from './interface/components/Buttons/BackToMainMenuButton.js';
 
+import monitorUserUsage from './services/moduls/crons/monitorUserUsage.js';
+
+cron.schedule('*/4 * * * *', async () => {
+    console.log('Cron job triggered at:', new Date());
+    await monitorUserUsage();  // Call the function to check users' usages
+});
 // --- Command Handlers ---
 bot.command('start', withErrorHandling(callbacks.startCallback));
 bot.callbackQuery('start', withErrorHandling(callbacks.startCallback));
@@ -67,3 +72,4 @@ bot.catch(async (err) => {
 
 // Start the bot
 bot.start();
+

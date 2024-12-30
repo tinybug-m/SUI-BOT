@@ -5,7 +5,7 @@ const DEFAULT_STATUS = 'pending';
 const db = new Datastore({ filename: 'dbfile', autoload: true });
 
 // Utility functions
-const readDb = async () => {
+export const readDb = async () => {
     return new Promise((resolve, reject) => {
         db.find({}, (err, docs) => {
             if (err) reject(err);
@@ -162,6 +162,21 @@ export const addConfigToUser = async (userId, config) => {
     });
 
     return `Config "${config}" successfully added to user`;
+};
+
+// Update payment status
+export const updateSubscriptionNotif = async (userId, username, status) => {
+    const user = await findUser(userId);
+    if (!user) throw new Error(`User with ID ${userId} not found.`);
+
+    const subscription = user.subscriptions.find(s => s.username == username);
+    if (!subscription) throw new Error(`subscription with Username ${username} not found for user ${userId}.`);
+
+    subscription.notif = status;
+
+    db.update({ id: userId }, { $set: { subscriptions: user.subscriptions } }, {}, (err) => {
+        if (err) throw new Error(`Error updating payment status: ${err}`);
+    });
 };
 
 // Get List of configs from user

@@ -9,6 +9,7 @@
     "jest": "^29.7.0",
     "lowdb": "^7.0.1",
     "nedb": "^1.8.0",
+    "node-cron": "^3.0.3",
     "uuid": "^11.0.3"
   },
   "name": "sui-bot",
@@ -21,6 +22,7 @@
     "test:editClinet": "jest --runInBand test/services/moduls/02-editConfig.integeration.test.js",
     "test:getUsage": "jest --runInBand test/services/moduls/03-getConfigUsage.integeration.test.js",
     "test:handleRefferal": "jest test/services/moduls/04-handleRefferalPrize.integration.test.js",
+    "test:crons": "jest test/services/moduls/crons/usersUsage.integration.test.js",
     "start": "nodemon index.js",
     "production": "pm2 start index.js --name vpn-bot --log-date-format 'YYYY-MM-DD HH:mm:ss' --log /path/to/custom/logfile.log --watch",
     "stop": "pm2 stop all",

@@ -101,7 +101,7 @@ describe("Integration test for createNewConfig function", () => {
     })
 
     it("should add newConfig to telegram robot database", async () => {
-        const configAded = await addConfigToUser(ctx.from.id,extractedValue)
+        const configAded = await addConfigToUser(ctx.from.id, { username: extractedValue, notif: false })
         console.log(configAded)
         expect(true).toBeTruthy()
     })

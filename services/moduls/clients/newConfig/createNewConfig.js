@@ -22,7 +22,7 @@ async function createNewConfig(username = "tinyvpn", volume = 10,userId) {
     const apiResponse = await saveClientApiConfig(configData, process.env.SERVER_URL, process.env.USER_CREDENTIALS)
 
     if(apiResponse.success){
-        const configAdded = await addConfigToUser(userId,username)
+        const configAdded = await addConfigToUser(userId,{ username: username, notif: false })
         console.log({configAdded})
     }
 
